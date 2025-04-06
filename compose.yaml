@@ -1,0 +1,33 @@
+name: llama-4-researcher
+
+services:
+  llama_redis:
+    image: redis
+    ports: 
+      - 6379:6379
+    networks:
+      - nginxproxymanager_default
+  llama_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    secrets:
+      - groq_key
+      - internal_key
+      - linkup_key
+    networks:
+      - nginxproxymanager_default 
+    ports:
+      - 7998:80
+
+networks:
+  nginxproxymanager_default:
+    external: true
+
+secrets:
+  groq_key:
+    environment: groq_api_key
+  linkup_key:
+    environment: linkup_api_key
+  internal_key:
+    environment: internal_api_key

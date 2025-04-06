@@ -1,0 +1,5 @@
+.env
+.mypy_cache/
+__pycache__/
+tests/
+llama-4-researcher.code-workspace
