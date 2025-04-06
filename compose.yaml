@@ -4,7 +4,7 @@ services:
   llama_redis:
     image: redis
     ports: 
-      - 6379:6379
+      - 6380:6379
     networks:
       - nginxproxymanager_default
   llama_app:
