@@ -1,0 +1,4 @@
+supabase==2.15.0
+gradio==5.23.3
+pydantic[email]
+pydantic_core
