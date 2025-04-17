@@ -109,7 +109,11 @@ with gr.Blocks() as donation:
     <a href="https://github.com/sponsors/AstraBert"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GitHub Sponsors Badge"></a>
 </div>""")
     gr.HTML("<br>")
-    gr.Markdown("Your donation is **crucial** to keep this project open source and free for everyone, forever: thanks in advance!🙏")
+    gr.HTML("<h3 align='center'>Your donation is crucial to keep this project open source and free for everyone, forever: thanks in advance!🙏</h3>")
+    gr.HTML("<br>")
+    gr.HTML("""<div align='center'>
+        <img src="https://pnjuuftbupelnuqgkyko.supabase.co/storage/v1/object/sign/image/image-_8_.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzA1ZDUyOWFhLTU3YzktNDBhYS1hMDczLWI0OGYwNmI3YTAxMSJ9.eyJ1cmwiOiJpbWFnZS9pbWFnZS1fOF8ucG5nIiwiaWF0IjoxNzQ0OTI2MjA0LCJleHAiOjIwNjAyODYyMDR9.sBB0za4uMtSiZ0vOgKEAn-XOMFTCIdUw5NTY4j_i-2k" alt="LlamaResearcher">
+</div>""")
 
 iface = gr.TabbedInterface(interface_list=[donation, frontend], tab_names=["Home Page", "Chat Application"])
 
