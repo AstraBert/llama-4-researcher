@@ -1,0 +1,11 @@
+FROM python:3.11.9-slim-bookworm
+
+WORKDIR /register/
+
+COPY ./register.py /register/
+COPY ./requirements.register.txt /register/
+
+RUN pip cache purge
+RUN pip install --no-cache-dir -r requirements.register.txt
+
+CMD ["python3", "register.py"]

@@ -15,10 +15,23 @@ services:
       - groq_key
       - internal_key
       - linkup_key
+      - supabase_api_key
+      - supabase_api_url
     networks:
       - nginxproxymanager_default 
     ports:
       - 7998:80
+  llama_register:
+    build:
+      context: .
+      dockerfile: Dockerfile.register
+    secrets:
+      - supabase_api_key
+      - supabase_api_url
+    networks:
+      - nginxproxymanager_default 
+    ports:
+      - 7860:80
 
 networks:
   nginxproxymanager_default:
@@ -31,3 +44,7 @@ secrets:
     environment: linkup_api_key
   internal_key:
     environment: internal_api_key
+  supabase_api_key:
+    environment: supa_key
+  supabase_api_url:
+    environment: supa_url 

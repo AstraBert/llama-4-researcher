@@ -9,6 +9,7 @@ from fastapi.responses import ORJSONResponse
 from pydantic import BaseModel
 import gradio as gr
 import requests
+from auth import authenticate_user
 
 class ApiInput(BaseModel):
     prompt: str
@@ -102,4 +103,15 @@ with gr.Blocks(theme=gr.themes.Citrus(), title="LlamaResearcher") as frontend:
                 bot_msg = chat_msg.then(bot, chatbot, [chatbot, canvas], api_name="bot_response")
                 bot_msg.then(lambda: gr.Textbox(interactive=True), None, [chat_input])
 
-app = gr.mount_gradio_app(app, frontend, "")
+with gr.Blocks() as donation:
+    gr.HTML("""<h2 align="center">If you find LlamaResearcher useful, please consider to support us through donation:</h2>
+<div align="center">
+    <a href="https://github.com/sponsors/AstraBert"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GitHub Sponsors Badge"></a>
+</div>""")
+    gr.HTML("<br>")
+    gr.Markdown("Your donation is **crucial** to keep this project open source and free for everyone, forever: thanks in advance!🙏")
+
+iface = gr.TabbedInterface(interface_list=[donation, frontend], tab_names=["Home Page", "Chat Application"])
+
+app = gr.mount_gradio_app(app, iface, "", auth=authenticate_user, auth_message="Input your username and password. If you are not already registered, go to <a href='https://register.llamaresearcher.com'><u>the registration page</u></a>.<br><u><a href='https://register.llamaresearcher.com'>Forgot your password?</a></u>")
+
