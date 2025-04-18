@@ -27,16 +27,17 @@ cd llama-4-researcher
 
 Once there, you can follow this approach
 
-- Add the `groq_api_key`, `internal_api_key` and `linkup_api_key` variable in the [`.env.example`](./.env.example) file and modify the name of the file to `.env`. Get these keys:
+- Add the `groq_api_key`, `internal_api_key`, `linkup_api_key` variable and the variables to connect to a Postgres database in the [`.env.example`](./.env.example) file and modify the name of the file to `.env`. Get these keys:
     + [On Groq Console](https://console.groq.com/keys)
     + [On Linkup Dashboard](https://app.linkup.so/api-keys)
     + You can create your own internal key
+    + You can create your own variables to connect to a Postgres database, or, if you're using Supabase, you can get them clicking on the "Connection" widget at the top of the page.
 
 ```bash
 mv .env.example .env
 ```
 
-- Or do it manually:
+- And now launch the docker containers:
 
 ```bash
 docker compose up -f compose.local.yaml llama_redis -d
@@ -50,6 +51,8 @@ You will see the application running on http://localhost:8000 and you will be ab
 ### Database services
 
 - **Redis** is used for API rate limiting control
+
+You must have a Postgres instance running externally, in which you will see the analytics of the searches that LlamaResearcher performs.
 
 ### Workflow
 

@@ -17,6 +17,10 @@ services:
       - linkup_key
       - supabase_api_key
       - supabase_api_url
+      - postgres_host
+      - postgres_user
+      - postgres_db
+      - postgres_password
     networks:
       - nginxproxymanager_default 
     ports:
@@ -32,7 +36,7 @@ services:
       - nginxproxymanager_default 
     ports:
       - 7860:80
-
+      
 networks:
   nginxproxymanager_default:
     external: true
@@ -48,3 +52,14 @@ secrets:
     environment: supa_key
   supabase_api_url:
     environment: supa_url 
+  postgres_host:
+    environment: pgql_host
+  postgres_user:
+    environment: pgql_user
+  postgres_password:
+    environment: pgql_psw
+  postgres_db:
+    environment: pgql_db
+
+volumes:
+  pgdata:

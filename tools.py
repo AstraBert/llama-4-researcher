@@ -1,9 +1,9 @@
-from linkup import LinkupClient
-from dotenv import load_dotenv
+from linkup_monitor.monitor import MonitoredLinkupClient, LinkupClient
+from linkup_monitor.add_types import SearchInput
+from linkup_monitor.postgres_client import PostgresClient
 from llama_index.core.llms import ChatMessage
 from pydantic import BaseModel, Field
 from llama_index.llms.groq import Groq
-from llama_index.core.workflow import Context
 from typing import Tuple
 import json
 
@@ -15,7 +15,25 @@ with open("/run/secrets/linkup_key", "r") as g:
     linkup_api_key = g.read()
 g.close()
 
+with open("/run/secrets/postgres_user", "r") as h:
+    postgres_user = h.read()
+h.close()
+
+with open("/run/secrets/postgres_db", "r") as i:
+    postgres_db = i.read()
+i.close()
+
+with open("/run/secrets/postgres_password", "r") as j:
+    postgres_password = j.read()
+j.close()
+
+with open("/run/secrets/postgres_host", "r") as k:
+    postgres_host = k.read()
+k.close()
+
 linkup_client = LinkupClient(api_key=linkup_api_key)
+postgres_client = PostgresClient(host=postgres_host, port=5432, user=postgres_user, database=postgres_db, password=postgres_password)
+monitored_client = MonitoredLinkupClient(linkup_client=linkup_client, postgres_client=postgres_client)
 
 class EvaluateContext(BaseModel):
     context_is_ok: int = Field(description="Is the context relevant to the question? Give a score between 0 and 100")
@@ -70,10 +88,8 @@ async def deepsearch(query: str) -> str:
     
     Args:
         query (str): the query to be searched"""
-    response = linkup_client.search(
-        query=query,
-        depth="deep",
-        output_type="sourcedAnswer",
+    response = monitored_client.search(
+        data=SearchInput(query=query, output_type='sourcedAnswer', depth='deep')
     )
     answer = response.answer
     sources = response.sources
