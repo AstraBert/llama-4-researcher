@@ -132,7 +132,7 @@ def recover_password(username: str, email: str):
 reg = gr.Interface(fn=register, inputs=[gr.Textbox(label="Username"), gr.Textbox(label="Email Address", type="text"), gr.Textbox(label="Password", type="password"), gr.Textbox(label="Confirm Password", type="password")], outputs=None)
 chan = gr.Interface(fn=change_password, inputs=[gr.Textbox(label="Username"), gr.Textbox(label="Email Address", type="text"), gr.Textbox(label="Old Password", type="password"), gr.Textbox(label="New Password", type="password")], outputs=None)
 rec = gr.Interface(fn=recover_password, inputs=[gr.Textbox(label="Username"), gr.Textbox(label="Email Address", type="text")], outputs=[gr.Textbox(label="Temporary Password")], allow_flagging="never")
-iface = gr.TabbedInterface(interface_list=[reg, chan, rec], tab_names=["Register", "Change Password", "Recover Password"], title="Register to LlamaResearcher")
+iface = gr.TabbedInterface(interface_list=[reg, chan, rec], tab_names=["Register", "Change Password", "Recover Password"], title="Register to LlamaResearcher", theme=gr.themes.Citrus())
 
 if __name__ == "__main__":
     iface.launch(server_name="0.0.0.0", server_port=80)

@@ -81,7 +81,7 @@ def bot(history: list):
         history.append({"role": "assistant", "content": f"Sorry, an internal error occurred. Feel free to report the bug on [GitHub discussions](https://github.com/AstraBert/llama-4-researcher/discussions/)"})
         return history, "# Canvas\n\n---\n\n"+res
 
-with gr.Blocks(theme=gr.themes.Citrus(), title="LlamaResearcher") as frontend:
+with gr.Blocks() as frontend:
     title = gr.HTML("<h1 align='center'>LlamaResearcher</h1>\n<h2 align='center'>From topic to essay in seconds!</h2>")
     with gr.Row():
         with gr.Column():
@@ -115,7 +115,7 @@ with gr.Blocks() as donation:
         <img src="https://pnjuuftbupelnuqgkyko.supabase.co/storage/v1/object/sign/image/image-_8_.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzA1ZDUyOWFhLTU3YzktNDBhYS1hMDczLWI0OGYwNmI3YTAxMSJ9.eyJ1cmwiOiJpbWFnZS9pbWFnZS1fOF8ucG5nIiwiaWF0IjoxNzQ0OTI2MjA0LCJleHAiOjIwNjAyODYyMDR9.sBB0za4uMtSiZ0vOgKEAn-XOMFTCIdUw5NTY4j_i-2k" alt="LlamaResearcher">
 </div>""")
 
-iface = gr.TabbedInterface(interface_list=[donation, frontend], tab_names=["Home Page", "Chat Application"])
+iface = gr.TabbedInterface(interface_list=[donation, frontend], tab_names=["Home Page", "Chat Application"],theme=gr.themes.Citrus(), title="LlamaResearcher")
 
 app = gr.mount_gradio_app(app, iface, "", auth=authenticate_user, auth_message="Input your username and password. If you are not already registered, go to <a href='https://register.llamaresearcher.com'><u>the registration page</u></a>.<br><u><a href='https://register.llamaresearcher.com'>Forgot your password?</a></u>")
 
