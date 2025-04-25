@@ -3,7 +3,7 @@
 <h2 align="center">Turn topics into essays in seconds!</h2>
 
 <div align="center">
-    <h3>If you find LlamaResearcher userful, please consider to donate and support the project:</h3>
+    <h3>If you find LlamaResearcher useful, please consider to donate and support the project:</h3>
     <a href="https://github.com/sponsors/AstraBert"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA" alt="GitHub Sponsors Badge"></a>
 </div>
 <br>
@@ -32,6 +32,7 @@ Once there, you can follow this approach
     + [On Linkup Dashboard](https://app.linkup.so/api-keys)
     + You can create your own internal key
     + You can create your own variables to connect to a Postgres database, or, if you're using Supabase, you can get them clicking on the "Connection" widget at the top of the page.
+    + You can get your Supabase URL and Supabase API key on [Supabase](https://supabase.co)
 
 ```bash
 mv .env.example .env
@@ -40,17 +41,19 @@ mv .env.example .env
 - And now launch the docker containers:
 
 ```bash
-docker compose up -f compose.local.yaml llama_redis -d
-docker compose up -f compose.local.yaml llama_app -d
+docker compose -f compose.local.yaml up llama_redis -d
+docker compose -f compose.local.yaml up llama_register -d
+docker compose -f compose.local.yaml up llama_app -d
 ```
 
-You will see the application running on http://localhost:8000 and you will be able to use it. Depending on your connection and on your hardware, the set up might take some time (up to 15 mins to set up) - but this is only for the first time your run it!
+You will see the application running on http://localhost:8000 and the registration page at http://localhost:7860, and you will be able to use both. Depending on your connection and on your hardware, the set up might take some time (up to 15 mins to set up) - but this is only for the first time your run it!
 
 ## How it works
 
 ### Database services
 
 - **Redis** is used for API rate limiting control
+- **Supabase** manages user registration and sign-in
 
 You must have a Postgres instance running externally, in which you will see the analytics of the searches that LlamaResearcher performs.
 
