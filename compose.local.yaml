@@ -13,8 +13,23 @@ services:
       - groq_key
       - internal_key
       - linkup_key
+      - supabase_api_key
+      - supabase_api_url
+      - postgres_host
+      - postgres_user
+      - postgres_db
+      - postgres_password
     ports:
-      - 8000:8000
+      - 8000:80
+  llama_register:
+    build:
+      context: .
+      dockerfile: Dockerfile.register
+    secrets:
+      - supabase_api_key
+      - supabase_api_url
+    ports:
+      - 7860:80
 
 secrets:
   groq_key:
@@ -23,3 +38,18 @@ secrets:
     environment: linkup_api_key
   internal_key:
     environment: internal_api_key
+  supabase_api_key:
+    environment: supa_key
+  supabase_api_url:
+    environment: supa_url 
+  postgres_host:
+    environment: pgql_host
+  postgres_user:
+    environment: pgql_user
+  postgres_password:
+    environment: pgql_psw
+  postgres_db:
+    environment: pgql_db
+
+volumes:
+  pgdata:
