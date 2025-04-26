@@ -38,7 +38,24 @@ Once there, you can follow this approach
 mv .env.example .env
 ```
 
-- And now launch the docker containers:
+- In your Supabase Dashboard, go to SQL Editor on the left and open it, so that you can run the following command:
+
+
+```sql
+CREATE TABLE IF NOT EXISTS public.user_clone (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT NOW(),
+    username TEXT DEFAULT NULL,
+    email TEXT DEFAULT NULL,
+    password TEXT DEFAULT NULL
+);
+```
+
+See the following image for reference:
+
+![SQL Editor reference](./sql_editor.png)
+
+- You can now launch the containers with the following commands:
 
 ```bash
 docker compose -f compose.local.yaml up llama_redis -d
