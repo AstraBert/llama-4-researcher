@@ -3,3 +3,4 @@
 __pycache__/
 tests/
 llama-4-researcher.code-workspace
+.github/
