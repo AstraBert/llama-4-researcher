@@ -42,7 +42,7 @@ mv .env.example .env
 
 
 ```sql
-CREATE TABLE IF NOT EXISTS public.user_clone (
+CREATE TABLE IF NOT EXISTS public.users (
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP DEFAULT NOW(),
     username TEXT DEFAULT NULL,
