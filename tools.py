@@ -45,7 +45,7 @@ class ExpandedQuery(BaseModel):
 llm = Groq(model="meta-llama/llama-4-scout-17b-16e-instruct", api_key=groq_api_key)
 llm_eval = llm.as_structured_llm(EvaluateContext)
 llm_expand = llm.as_structured_llm(ExpandedQuery)
-llm_guard = Groq(model="llama-guard-3-8b", api_key=groq_api_key)
+llm_guard = Groq(model="meta-llama/llama-guard-4-12b", api_key=groq_api_key)
 
 hazard_categories = {
     "S1": "Violent Crimes",
